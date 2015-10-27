@@ -8,7 +8,7 @@ import java.net.URI;
 
 public class App {
     public static void main(String... args) {
-        URI baseUri = UriBuilder.fromUri("http://localhost/").port(9998).build();
+        URI baseUri = UriBuilder.fromUri("http://localhost/").port(8080).build();
         ResourceConfig config = new ResourceConfig()
                 .packages("com.tw");
         GrizzlyHttpServerFactory.createHttpServer(baseUri, config);

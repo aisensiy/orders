@@ -1,6 +1,8 @@
 package com.tw.resource;
 
 import com.tw.json.ProductJson;
+import com.tw.mapper.ProductMapper;
+import com.tw.model.Price;
 import com.tw.model.Product;
 
 import javax.ws.rs.*;
@@ -8,6 +10,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import java.sql.Timestamp;
 
 @Path("/products")
 public class ProductResource {
@@ -23,8 +26,7 @@ public class ProductResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public ProductJson getProductById(@PathParam("productId") int id) {
-        Product product = new Product("product1");
-        return new ProductJson(product, uriInfo);
+        return new ProductJson(ProductMapper.getProductById(id), uriInfo);
     }
 
     @POST

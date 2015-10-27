@@ -9,6 +9,9 @@ public class Product {
         this.name = name;
     }
 
+    public Product() {
+    }
+
     public String getName() {
         return name;
     }
@@ -19,5 +22,13 @@ public class Product {
 
     public int getId() {
         return id;
+    }
+
+    public void setPrice(Price price) {
+        this.price = price;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

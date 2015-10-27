@@ -18,22 +18,19 @@ public class ProductResourceTest extends JerseyTest {
 
     @Override
     protected Application configure() {
-        return new ResourceConfig(ProductResource.class);
+        return new ResourceConfig().packages("com.tw");
     }
 
     @Test
     public void should_get_product_list() throws Exception {
-        final String productList = target("/products").request().get(String.class);
-        assertThat(productList, is("get products"));
+        final Response response = target("/products").request().get();
+        assertThat(response.getStatus(), is(200));
     }
 
     @Test
     public void should_get_product_by_id() throws Exception {
         Response response = target("/products/1").request().get();
         assertThat(response.getStatus(), is(200));
-        Map product = response.readEntity(Map.class);
-        assertThat(product.get("name"), is("product1"));
-        assertThat((String) product.get("uri"), endsWith("products/0"));
     }
 
     @Test
@@ -44,7 +41,7 @@ public class ProductResourceTest extends JerseyTest {
 
     @Test
     public void should_update_product() throws Exception {
-        Response response = target("/products/id").request().put(Entity.json("{\"name\":\"product\"}"));
+        Response response = target("/products/1").request().put(Entity.json("{\"name\":\"product\"}"));
         assertThat(response.getStatus(), is(200));
     }
 }
