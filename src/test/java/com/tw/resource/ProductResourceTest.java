@@ -29,7 +29,7 @@ public class ProductResourceTest extends JerseyTest {
 
     @Test
     public void should_get_product_by_id() throws Exception {
-        Response response = target("/products/id").request().get();
+        Response response = target("/products/1").request().get();
         assertThat(response.getStatus(), is(200));
         Map product = response.readEntity(Map.class);
         assertThat(product.get("name"), is("product1"));

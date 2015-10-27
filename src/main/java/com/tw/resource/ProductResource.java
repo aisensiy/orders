@@ -11,6 +11,7 @@ import javax.ws.rs.core.UriInfo;
 
 @Path("/products")
 public class ProductResource {
+    @Context UriInfo uriInfo;
 
     @GET
     public String getProducts() {
@@ -21,7 +22,7 @@ public class ProductResource {
     @Path("{productId}/")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public ProductJson getProductById(@PathParam("productId") String id, @Context UriInfo uriInfo) {
+    public ProductJson getProductById(@PathParam("productId") int id) {
         Product product = new Product("product1");
         return new ProductJson(product, uriInfo);
     }

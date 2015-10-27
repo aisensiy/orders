@@ -3,14 +3,13 @@ package com.tw.json;
 import com.tw.model.Product;
 import com.tw.resource.ProductResource;
 
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
 public class ProductJson {
-
+    UriInfo uriInfo;
     private Product product;
-    private UriInfo uriInfo;
-    private PriceJson price;
 
     public ProductJson(Product product, UriInfo uriInfo) {
         this.product = product;
@@ -22,9 +21,7 @@ public class ProductJson {
     }
 
     public String getUri() {
-        UriBuilder baseUriBuilder = uriInfo.getBaseUriBuilder();
-        UriBuilder path = baseUriBuilder.path(ProductResource.class);
-        return path.build().toString() + "/" + product.getId();
+        return uriInfo.getBaseUriBuilder().path(ProductResource.class).path("/" + product.getId()).toString();
     }
 
     public PriceJson getPrice() {
