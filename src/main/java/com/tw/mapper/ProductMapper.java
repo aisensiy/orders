@@ -11,4 +11,8 @@ public class ProductMapper {
         product.setPrice(new Price(100, new Timestamp(0)));
         return product;
     }
+
+    public static void create(Product product) {
+
+    }
 }

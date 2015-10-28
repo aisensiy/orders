@@ -8,6 +8,7 @@ import org.junit.Test;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.endsWith;
@@ -35,13 +36,17 @@ public class ProductResourceTest extends JerseyTest {
 
     @Test
     public void should_create_product_with_status_201() throws Exception {
-        Response response = target("/products").request().post(Entity.json("{\"name\":\"product\"}"));
+        Map<String, String> map = new HashMap<>();
+        map.put("name", "product");
+        Response response = target("/products").request().post(Entity.entity(map, MediaType.APPLICATION_JSON_TYPE));
         assertThat(response.getStatus(), is(201));
     }
 
     @Test
     public void should_update_product() throws Exception {
-        Response response = target("/products/1").request().put(Entity.json("{\"name\":\"product\"}"));
+        Map<String, String> map = new HashMap<>();
+        map.put("name", "newProduct");
+        Response response = target("/products/1").request().put(Entity.entity(map, MediaType.APPLICATION_JSON_TYPE));
         assertThat(response.getStatus(), is(200));
     }
 }

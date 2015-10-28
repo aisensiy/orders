@@ -2,7 +2,6 @@ package com.tw.resource;
 
 import com.tw.json.ProductJson;
 import com.tw.mapper.ProductMapper;
-import com.tw.model.Price;
 import com.tw.model.Product;
 
 import javax.ws.rs.*;
@@ -10,7 +9,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import java.sql.Timestamp;
 
 @Path("/products")
 public class ProductResource {
@@ -33,7 +31,8 @@ public class ProductResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createProduct(Product product) {
-        return Response.status(201).build();
+        ProductMapper.create(product);
+        return Response.status(201).header("location", new ProductJson(product, uriInfo).getUri()).build();
     }
 
     @PUT
